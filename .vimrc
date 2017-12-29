@@ -1,5 +1,46 @@
 " .vimrc File
 
+"------------------------"
+"VIM-PLUG PLUGIN SETTINGS" 
+"------------------------" 
+" https://github.com/junegunn/vim-plug
+" PlugInstall [name ...] [#threads]	Install plugins
+" PlugUpdate [name ...] [#threads]	Install or update plugins
+" PlugClean[!]	Remove unused directories (bang version will clean without prompt)
+" PlugUpgrade	Upgrade vim-plug itself
+" PlugStatus	Check the status of plugins
+" PlugDiff	Examine changes from the previous update and the pending changes
+" PlugSnapshot[!] [output path]	Generate script for restoring the current snapshot of the PlugInstall
+
+call plug#begin('~/.vim/plugged')
+
+" Insert or delete brackets, parens, quotes in pair.
+Plug 'jiangmiao/auto-pairs'
+" With bufexplorer, you can quickly and easily switch between buffers by using the one of the default public interfaces
+Plug 'jlanzarotta/bufexplorer'
+" ColorV is a color view/pick/edit/design/scheme tool in vim.
+Plug 'Rykka/colorv.vim'
+" emmet-vim is a vim plug-in which provides support for expanding abbreviations similar to emmet.
+Plug 'mattn/emmet-vim'
+Plug 'Yggdroot/indentLine'
+Plug 'othree/jspc.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'kopischke/vim-fetch'
+Plug 'elzr/vim-json'
+Plug 'digitaltoad/vim-pug'
+Plug 'wavded/vim-stylus'
+Plug 'tpope/vim-surround'
+
+Plug 'sjl/badwolf'
+
+call plug#end()
+
 "Forget compatibility with Vi. Who cares.
 set nocompatible
 
@@ -179,16 +220,23 @@ autocmd VimEnter * wincmd p
 "--------------------------"
 "INDENTLINE PLUGIN SETTINGS" 
 "--------------------------" 
-let g:indentLine_char = '+'
+let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
+
+"-----------------------"
+"THEME PLUGIN SETTINGS" 
+"-----------------------" 
+colorscheme badwolf
+g:badwolf_darkgutter = 1
 
 "-----------------------"
 "AIRLINE PLUGIN SETTINGS" 
 "-----------------------" 
+let g:airline_theme = 'badwolf'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " unicode symbols
@@ -213,5 +261,3 @@ let g:airline_right_alt_sep = ' '
 let g:airline_symbols.branch = ' '
 let g:airline_symbols.readonly = ' '
 let g:airline_symbols.linenr = ' '
-
-execute pathogen#infect() 
