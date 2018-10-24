@@ -36,10 +36,47 @@ Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'tpope/vim-surround'
-
+Plug 'blueyed/vim-diminactive'
+Plug 'ryanoasis/vim-devicons' "adds filetype glyphs (icons) to other plugins such as NERDTree, vim-airline, CtrlP, powerline, Denite, unite, lightline.vim, vim-startify, vimfiler, and flagship
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sjl/badwolf'
-
+Plug 'tpope/vim-fugitive'
+Plug 'robu3/vimongous'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'junegunn/goyo.vim'
+Plug 'posva/vim-vue'
+Plug 'luochen1990/rainbow'
+Plug 'mattn/webapi-vim'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'junegunn/limelight.vim'
+Plug 'rhysd/vim-grammarous'
 call plug#end()
+
+"
+let g:rainbow_active = 1
+let g:user_emmet_leader_key='<C-Z>'
+
+"goyo customisation
+function s:goyo_enter()
+  set textwidth=0
+  Limelight
+endfunction
+
+function s:goyo_leave()
+  set textwidth=79
+  Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"Grammarous rules
+let g:grammarous#default_comments_only_filetypes = {
+  \ '*' : 1, 'help' : 0, 'markdown' : 0,
+  \ }
+
+"Store swapfiles in seperate directory
+set directory=~/.vim/swapfiles//
 
 "Forget compatibility with Vi. Who cares.
 set nocompatible
@@ -192,6 +229,10 @@ iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusm
 iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
 
 "Spelling corrects. Just for example. Add yours below.
+
+set spelllang=en
+"set spellfile=~/my_vim/en.utf-8.adds
+
 iab teh the
 iab Teh The
 
@@ -204,6 +245,15 @@ set foldmethod=marker
 
 set clipboard=unnamed
 
+set macligatures
+set guifont=knack\ Code:h12
+
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+
+
 "------------------------"
 "NERDTREE PLUGIN SETTINGS
 "------------------------"
@@ -215,7 +265,8 @@ let NERDTreeShowHidden=0
 
 "autopen NERDTree and focus cursor in new document
 autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
+let NERDTreeIgnore = ['README.md', '\.pyc$', '\.swp$', 'node_modules', 'platforms', 'package-lock.json', 'LICENSE', '\.ts$']
 
 "--------------------------"
 "INDENTLINE PLUGIN SETTINGS" 
@@ -227,7 +278,6 @@ let g:indentLine_color_term = 239
 "THEME PLUGIN SETTINGS" 
 "-----------------------" 
 colorscheme badwolf
-g:badwolf_darkgutter = 1
 
 "-----------------------"
 "AIRLINE PLUGIN SETTINGS" 
